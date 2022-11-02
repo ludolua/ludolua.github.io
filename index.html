@@ -22,7 +22,7 @@
           <h1>ludo<span>lua</span></h1>
         </div>
         <ul class="home-header-navigation">
-          <a ><li id="home-header-navigation-home">Home</li></a>
+          <a><li id="home-header-navigation-home">Home</li></a>
           <a><li id="home-header-navigation-about">About</li></a> 
           <a><li id="home-header-navigation-work">Work</li></a>
           <a><li id="home-header-navigation-contact">Contact</li></a>
@@ -30,7 +30,41 @@
       </div>
     </header>
 
-    <footer></footer>
+    <main>
+        <div class="main-content-contacts">
+          <form action="mailto:ludoluua@gmail.com">
+            <h2 class="main-content-contact-title">Mail me!</h2>
+            <label for="fname">First Name</label>
+            <br>
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+            <br>
+            <label for="lname">Last Name</label>
+            <br>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+            <br>
+            <label for="country">Country</label>
+            <br>
+            <select id="country" name="country">
+              <option value="australia">Brasil</option>
+              <option value="canada">Canada</option>
+              <option value="usa">USA</option>
+            </select>
+            <br>
+            <label for="subject">Subject</label>
+            <br>
+            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            <br>
+            <input type="submit" value="Submit">
+        
+          </form>
+        </div>
+    </main>
+    <footer>
+
+      <div>
+        
+      </div>
+    </footer>
 
     <script src="./content/js/index.js"></script>
   </body>
