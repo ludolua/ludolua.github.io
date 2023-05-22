@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #24252a;
+}
+li,
+a{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+}
+
+
+.nav-logo {
+  cursor: pointer;
+}
+
+.navbar_links {
+  list-style: none;
+}
+
+.navbar_links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.navbar_links li a {
+  transition: all 0.3s ease 0s;
+}
+
+.navbar_links li a:hover {
+  color: greenyellow;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+}
+
+.lol li a{
+  background: linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+    );
+  background-size: 100% 0.1em, 0 0.1em;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+  text-decoration: none;
+}
+
+.navbar_links a:hover,
+.navbar_links a:focus {
+  background-size: 0 0.1em, 100% 0.1em;
+}
+
+/* Mobile Menu */
+
+
+
+.navbar_links{
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.toggle{
+    cursor:pointer;
+}
+
+.bars{
+    background-color: #999;
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    width: 20px;
+}
+.bars::before,.bars::after{
+    background-color: #999;
+    display: inline-block;
+    content:"";
+    height: 2px;
+    position: absolute;
+    width: 20px;
+}
+.bars::before{
+    top: 5px;
+}
+.bars::after{
+    top: -5px;
+}
