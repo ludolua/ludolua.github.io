@@ -7,14 +7,13 @@
   background-color: #24252a;
 }
 li,
-a{
+a {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: #edf0f1;
   text-decoration: none;
 }
-
 
 .nav-logo {
   cursor: pointer;
@@ -44,7 +43,7 @@ header {
   padding: 30px 10%;
 }
 
-.lol li a{
+.lol li a {
   background: linear-gradient(
       to right,
       rgba(100, 200, 200, 1),
@@ -66,42 +65,4 @@ header {
 .navbar_links a:hover,
 .navbar_links a:focus {
   background-size: 0 0.1em, 100% 0.1em;
-}
-
-/* Mobile Menu */
-
-
-
-.navbar_links{
-    text-decoration: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;    
-}
-
-.toggle{
-    cursor:pointer;
-}
-
-.bars{
-    background-color: #999;
-    display: inline-block;
-    height: 2px;
-    position: relative;
-    width: 20px;
-}
-.bars::before,.bars::after{
-    background-color: #999;
-    display: inline-block;
-    content:"";
-    height: 2px;
-    position: absolute;
-    width: 20px;
-}
-.bars::before{
-    top: 5px;
-}
-.bars::after{
-    top: -5px;
 }
