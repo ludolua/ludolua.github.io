@@ -2,101 +2,481 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌍 Ludo Araujo | Projects</title>
     <link
-      rel="shortcut icon"
-      href="src/images/favicon2.svg"
-      type="image/x-icon"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" href="main.css" />
-    <title>ludolua - home</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+        color: #e0e0e0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .underline-animation {
+        position: relative;
+        display: inline-block;
+      }
+      .underline-animation::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: currentColor;
+        left: 0;
+        bottom: -2px;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+      .underline-animation:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+      .hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .custom-header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 10px 20px;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .header-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      .section {
+        margin: 2rem 0;
+      }
+      .content {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
+        padding: 2rem;
+      }
+      footer {
+        background-color: #222;
+        margin-top: auto;
+        padding: 1rem;
+        color: #ccc;
+      }
+      footer .social-links {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .cube-container {
+        perspective: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        margin-top: 20px;
+      }
+      .cube {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(0deg) rotateY(0deg);
+        transition: transform 0.5s ease;
+        user-select: none;
+      }
+      .face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: #e0e0e0;
+      }
+      .front {
+        transform: rotateY(0deg) translateZ(100px);
+      }
+      .back {
+        transform: rotateY(180deg) translateZ(100px);
+      }
+      .left {
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+      .right {
+        transform: rotateY(90deg) translateZ(100px);
+      }
+      .top {
+        transform: rotateX(90deg) translateZ(100px);
+      }
+      .bottom {
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+      @media (max-width: 640px) {
+        .cube-container {
+          height: 200px;
+        }
+        .cube {
+          width: 150px;
+          height: 150px;
+        }
+        .face {
+          width: 150px;
+          height: 150px;
+        }
+      }
+      .input-bg {
+        background-color: #1f2937;
+        color: white;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <div class="nav-hamburger-menu">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-      <nav class="nav-bar">
-        <ul>
-          <li>
-            <a href="#" class="nav-link">home</a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">projects</a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">about</a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">graphics</a>
-          </li>
-        </ul>
+    <!-- Header -->
+    <header class="custom-header hidden">
+      <nav class="flex justify-center items-center space-x-8">
+        <a
+          href="#hero"
+          class="text-white underline-animation"
+          id="home-link"
+        ></a>
+        <a
+          href="#about"
+          class="text-white underline-animation"
+          id="about-link"
+        ></a>
+        <a
+          href="#projects"
+          class="text-white underline-animation"
+          id="projects-link"
+        ></a>
+        <a
+          href="#contact"
+          class="text-white underline-animation"
+          id="contact-link"
+        ></a>
       </nav>
     </header>
-    <main>
-      <section class="main-presentation-container">
-        <div>
-          <h1>
-            Hey! my name is
-            <strong class="ludo-container"
-              ><br /><strong class="luiz-container">luiz</strong>
-              eduardo</strong
-            >
-          </h1>
-          <p>21 years old fullstack developer based in brazil 🌱</p>
-          <div>
-            <a
-              href="https://www.linkedin.com/in/luiz-eduardo-918017220/"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="#fff"
-                class="icon-linkedin"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"
-                />
-              </svg>
-            </a>
-            <a href="https://github.com/ludolua" target="_blank">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="#fff"
-                class="bi bi-github"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                />
-              </svg>
-            </a>
-            <div class="tools-used">
-              <h4 class="knowledge">knowledge</h4>
-              <img src="/src/images/icons/js.svg" alt="javascript" srcset="" />
-              <img src="/src/images/icons/html 1.svg" alt="" srcset="" />
-              <img src="/src/images/icons/css.svg" alt="" srcset="" />
-              <img src="/src/images/icons/tailwind 1.svg" alt="" srcset="" />
-              <img src="/src/images/icons/figma 1.svg" alt="" srcset="" />
-              <img src="/src/images/icons/git 1.svg" alt="" srcset="" />
-              <img src="/src/images/icons/mongodb 1.svg" alt="" srcset="" />
-              <img src="/src/images/icons/linux 1.svg" alt="" srcset="" />
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="overlay">
+        <div class="text-center">
+          <br /><br /><br /><br />
+          <h2 class="text-4xl md:text-6xl font-bold" id="hero-name"></h2>
+          <h3 class="text-xl md:text-2xl font-light" id="hero-title"></h3>
+          <!-- 3D Cube -->
+          <div class="cube-container">
+            <div class="cube">
+              <div class="face front" id="cube-front"></div>
+              <div class="face back" id="cube-back"></div>
+              <div class="face left" id="cube-left"></div>
+              <div class="face right" id="cube-right"></div>
+              <div class="face top" id="cube-top"></div>
+              <div class="face bottom" id="cube-bottom"></div>
             </div>
           </div>
         </div>
-        <div class="#">
-          <h2></h2>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container content">
+        <h2
+          class="text-3xl font-bold text-center mb-8 underline-animation"
+          id="about-title"
+        ></h2>
+        <p class="text-lg text-center" id="about-description"></p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container content">
+        <h2
+          class="text-3xl font-bold text-center mb-8 underline-animation"
+          id="projects-title"
+        ></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img
+              src="https://source.unsplash.com/random/400x300"
+              alt="Project 1"
+              class="w-full"
+            />
+            <div class="p-4">
+              <h3 class="text-xl font-bold text-white" id="project1-name"></h3>
+              <p class="mt-2 text-gray-400" id="project1-description"></p>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img
+              src="https://source.unsplash.com/random/400x301"
+              alt="Project 2"
+              class="w-full"
+            />
+            <div class="p-4">
+              <h3 class="text-xl font-bold text-white" id="project2-name"></h3>
+              <p class="mt-2 text-gray-400" id="project2-description"></p>
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img
+              src="https://source.unsplash.com/random/400x302"
+              alt="Project 3"
+              class="w-full"
+            />
+            <div class="p-4">
+              <h3 class="text-xl font-bold text-white" id="project3-name"></h3>
+              <p class="mt-2 text-gray-400" id="project3-description"></p>
+            </div>
+          </div>
         </div>
-      </section>
-      <script src="nav.js"></script>
-    </main>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="container content">
+        <h2
+          class="text-3xl font-bold text-center mb-8 underline-animation"
+          id="contact-title"
+        ></h2>
+        <form
+          action="https://formspree.io/f/xrbzkpke"
+          method="POST"
+          7
+          target="_blank"
+          class="space-y-4"
+        >
+          <input
+            type="text"
+            name="name"
+            required
+            class="w-full p-2 border border-gray-300 rounded-lg input-bg"
+            id="name-placeholder"
+          />
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full p-2 border border-gray-300 rounded-lg input-bg"
+            id="email-placeholder"
+          />
+          <textarea
+            name="message"
+            required
+            class="w-full p-2 border border-gray-300 rounded-lg input-bg"
+            id="message-placeholder"
+          ></textarea>
+          <button
+            type="submit"
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg"
+            id="send-button"
+          ></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p id="footer-copyright"></p>
+        <div class="social-links">
+          <a
+            href="https://www.linkedin.com/in/luizaraujo"
+            target="_blank"
+            class="text-blue-400 hover:underline"
+            id="linkedin-link"
+          ></a>
+          <a
+            href="https://github.com/luizaraujo"
+            target="_blank"
+            class="text-gray-400 hover:underline"
+            id="github-link"
+          ></a>
+          <a
+            href="mailto:luizeduardo55062@gmail.com"
+            class="text-yellow-400 hover:underline"
+            id="email-link"
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Carregar conteúdo do JSON
+      fetch("content.json")
+        .then((response) => response.json())
+        .then((data) => {
+          document.title = data.title;
+
+          // Header
+          document.getElementById("home-link").innerText = data.header.home;
+          // Header
+          document.getElementById("home-link").innerText = data.header.home;
+          document.getElementById("about-link").innerText = data.header.about;
+          document.getElementById("projects-link").innerText =
+            data.header.projects;
+          document.getElementById("contact-link").innerText =
+            data.header.contact;
+
+          // Hero
+          document.getElementById("hero-name").innerText = data.hero.name;
+          document.getElementById("hero-title").innerText = data.hero.title;
+          document.getElementById("cube-front").innerText =
+            data.hero.cube.front;
+          document.getElementById("cube-back").innerText = data.hero.cube.back;
+          document.getElementById("cube-left").innerText = data.hero.cube.left;
+          document.getElementById("cube-right").innerText =
+            data.hero.cube.right;
+          document.getElementById("cube-top").innerText = data.hero.cube.top;
+          document.getElementById("cube-bottom").innerText =
+            data.hero.cube.bottom;
+
+          // About
+          document.getElementById("about-title").innerText = data.about.title;
+          document.getElementById("about-description").innerText =
+            data.about.description;
+
+          // Projects
+          document.getElementById("projects-title").innerText =
+            data.projects.title;
+          document.getElementById("project1-name").innerText =
+            data.projects.project1.name;
+          document.getElementById("project1-description").innerText =
+            data.projects.project1.description;
+          document.getElementById("project2-name").innerText =
+            data.projects.project2.name;
+          document.getElementById("project2-description").innerText =
+            data.projects.project2.description;
+          document.getElementById("project3-name").innerText =
+            data.projects.project3.name;
+          document.getElementById("project3-description").innerText =
+            data.projects.project3.description;
+
+          // Contact
+          document.getElementById("contact-title").innerText =
+            data.contact.title;
+          document.getElementById("name-placeholder").placeholder =
+            data.contact.form.namePlaceholder;
+          document.getElementById("email-placeholder").placeholder =
+            data.contact.form.emailPlaceholder;
+          document.getElementById("message-placeholder").placeholder =
+            data.contact.form.messagePlaceholder;
+          document.getElementById("send-button").innerText =
+            data.contact.form.sendButton;
+
+          // Footer
+          document.getElementById("footer-copyright").innerText =
+            data.footer.copyright;
+          document.getElementById("linkedin-link").innerText =
+            data.footer.social.linkedin;
+          document.getElementById("github-link").innerText =
+            data.footer.social.github;
+          document.getElementById("email-link").innerText =
+            data.footer.social.email;
+        });
+
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          alert("Formulário enviado com sucesso! Obrigado pelo contato.");
+        });
+
+      window.addEventListener("load", function () {
+        const header = document.querySelector(".custom-header");
+        header.classList.add("hidden");
+      });
+
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".custom-header");
+        if (window.scrollY > 50) {
+          header.classList.remove("hidden");
+          header.classList.add("header-visible");
+        } else {
+          header.classList.remove("header-visible");
+          header.classList.add("hidden");
+        }
+      });
+
+      let isDragging = false;
+      let startX, startY;
+      let currentRotationX = 0,
+        currentRotationY = 0;
+
+      const cube = document.querySelector(".cube");
+
+      cube.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+      });
+
+      cube.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          currentRotationY += dx / 2;
+          currentRotationX -= dy / 2;
+          cube.style.transform = `rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`;
+          startX = e.clientX;
+          startY = e.clientY;
+        }
+      });
+
+      cube.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      cube.addEventListener("mouseleave", () => {
+        isDragging = false;
+      });
+    </script>
   </body>
 </html>

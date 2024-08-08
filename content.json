@@ -1,0 +1,58 @@
+{
+    "title": "🌍 Portfolio | Luiz Araujo",
+      "header": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "contact": "Contact"
+      },
+      "hero": {
+        "name": "Luiz Araujo",
+        "title": "Data Analyst and Python Developer",
+        "cube": {
+          "front": "Data",
+          "back": "Creativity",
+          "left": "Coffee",
+          "right": "Music",
+          "top": "Coding",
+          "bottom": "Excellence"
+        }
+      },
+      "about": {
+        "title": "About",
+        "description": "With over 2 years of experience in technology, I come from a highly analytical and creative background, always seeking data-driven solutions to innovate in solving day-to-day challenges."
+      },
+      "projects": {
+        "title": "Projects",
+        "project1": {
+          "name": "Maplanner",
+          "description": "Description of Project 1."
+        },
+        "project2": {
+          "name": "Project 2",
+          "description": "Description of Project 2."
+        },
+        "project3": {
+          "name": "Project 3",
+          "description": "Description of Project 3."
+        }
+      },
+      "contact": {
+        "title": "Contact",
+        "form": {
+          "namePlaceholder": "Name",
+          "emailPlaceholder": "Email",
+          "messagePlaceholder": "Message",
+          "sendButton": "Send"
+        }
+      },
+      "footer": {
+        "copyright": "Made with ❤️ by Ludo.",
+        "social": {
+          "linkedin": "LinkedIn",
+          "github": "GitHub",
+          "email": "Email"
+        }
+      }
+    }
+    
